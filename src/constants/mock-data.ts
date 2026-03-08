@@ -24,5 +24,14 @@ export const MOCK_SUBJECTS: Subject[] = [
         department: "English",
         description: "Study of classic and contemporary English literature.",
         createdAt: "2024-06-03T12:00:00Z"
-    }
+    },
+    {
+        id: 4,
+        code: "CS201",
+        name: "Data Structures",
+        department: "Computer Science",
+        description: "In-depth study of data structures and their applications.",
+        createdAt: "2024-06-04T12:00:00Z"
+    },
+    
 ];
