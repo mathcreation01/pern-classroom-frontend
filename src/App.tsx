@@ -17,7 +17,7 @@ import { BookOpen, Home } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
 import SubjectsList from "./pages/subjects/list";
 import SubjectsCreate from "./pages/subjects/create";
-
+import logoSvg from "./assets/sap.svg";
 function App() {
   return (
     <BrowserRouter>
@@ -35,7 +35,7 @@ function App() {
                 projectId: "c5Cwup-i9ll8w-3fat75",
                 title: { 
                   text: "Uni Class App",
-                  icon: <img src="../src/assets/sap.svg" alt="Project Logo Here" style={{ width: "24px", height: "24px", marginRight: "8px" }} />
+                  icon: <img src={logoSvg} alt="Project Logo Here" style={{ width: "24px", height: "24px", marginRight: "8px" }} />
                   // icon: <img src="../src/assets/logo1.png" alt="Project Logo Here"               />
                  }
               }}
