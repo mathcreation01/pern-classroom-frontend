@@ -11,7 +11,7 @@ import "./App.css";
 import { Toaster } from "./components/refine-ui/notification/toaster";
 import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
-import { dataProvider , } from "./providers/data2";
+import { dataProvider , } from "./providers/dataProvider";
 import Dashboard from "./pages/dashboard";
 import { BookOpen, Home } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
@@ -33,7 +33,13 @@ function App() {
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
                 projectId: "c5Cwup-i9ll8w-3fat75",
+                title: { 
+                  text: "Uni Class App",
+                  icon: <img src="../src/assets/sap.svg" alt="Project Logo Here" style={{ width: "24px", height: "24px", marginRight: "8px" }} />
+                  // icon: <img src="../src/assets/logo1.png" alt="Project Logo Here"               />
+                 }
               }}
+              
 
               resources={
                 [
@@ -72,7 +78,7 @@ function App() {
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />
             </Refine>
-            <DevtoolsPanel />
+            {/* <DevtoolsPanel /> */}
           </DevtoolsProvider>
         </ThemeProvider>
       </RefineKbarProvider>
