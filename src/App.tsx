@@ -20,6 +20,7 @@ import SubjectsCreate from "./pages/subjects/create";
 import logoSvg from "./assets/sap.svg";
 import ClassesCreate from "./pages/classes/create";
 import ClassesList from "./pages/classes/list";
+import ClassesShow from "./pages/classes/show";
 function App() {
   return (
     <BrowserRouter>
@@ -62,6 +63,7 @@ function App() {
                     list: "/classes",
                     create: "/classes/create",
                     edit: "/classes/edit/:id",
+                    show: "/classes/show/:id",
                     meta: { label: "Classes" , icon: <GraduationCap />}
                   }
                 ]
@@ -83,6 +85,7 @@ function App() {
                 <Route path="/classes" >
                   <Route index element={<ClassesList />} />
                   <Route path="create" element={<ClassesCreate />} />
+                  <Route path="show/:id" element={<ClassesShow />} />
                 </Route>
                 </Route>
               </Routes>
