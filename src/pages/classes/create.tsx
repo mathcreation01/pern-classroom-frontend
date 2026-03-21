@@ -45,27 +45,49 @@ const ClassesCreate = () => {
     },
   });
 
-  const { handleSubmit, formState :{isSubmitting , errors } , control } = form;
+  const { handleSubmit, formState :{isSubmitting , errors } , control,
+          refineCore: { onFinish }
+} = form;
 
   
 
-  const onSubmit = (values: z.infer<typeof classSchema>) => {
+  const onSubmit = async (values: z.infer<typeof classSchema>) => {
     try {
-      console.log("Form Values:", values);
+      await onFinish(values); 
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
 
-const teachers: { id: number; name: string }[] = [
-    { id: 1, name: "Jane Doe" },
-    { id: 2, name: "John Smith" },
-];
 
-const subjects: { id: number; name: string; code: string }[] = [
-    { id: 1, name: "Computer Science", code: "CSC102" },
-    { id: 2, name: "Mathematics", code: "MTH101" },
-];
+
+const { query :subjectsQuery } = useList<Subject>({
+    resource: "subjects",
+    pagination: {
+        pageSize: 100,
+    },
+});
+
+const { query :teachersQuery } = useList<User>({
+    resource: "users",
+    pagination: {
+        pageSize: 100,
+    },
+    filters: [
+        {
+            field: "role",
+            operator: "eq",
+            value: "teacher",
+        },
+    ],
+});
+
+const subjects = subjectsQuery.data?.data ?? [];
+const subjectsLoading = subjectsQuery.isLoading;
+const teachers = teachersQuery.data?.data ?? [];
+const teachersLoading = teachersQuery.isLoading;
+
+
 
 const bannerPublicId = form.watch("bannerCldPubId");
 const setBannerImage = (file :any, field: any) => {
@@ -178,7 +200,9 @@ const setBannerImage = (file :any, field: any) => {
                             (value) => field.onChange(Number(value))
                          } value={
                             field?.value?.toString()
-                         }>
+                         }
+                         disabled={subjectsLoading || subjects.length === 0}
+                         >
 
                             <FormControl>  
                                 <SelectTrigger className="w-full">
@@ -214,11 +238,10 @@ const setBannerImage = (file :any, field: any) => {
                         Teacher <span className="text-orange-600">*</span>
                       </FormLabel>
                       
-                         <Select onValueChange={
-                            (value) => field.onChange(Number(value))
-                         } value={
-                            field?.value?.toString()
-                         }>
+                         <Select 
+                         onValueChange={field.onChange}
+                          value={field.value?.toString()}
+                         disabled={teachersLoading || teachers.length === 0}>
 
                             <FormControl>  
                                 <SelectTrigger className="w-full">
